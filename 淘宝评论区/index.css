@@ -1,0 +1,96 @@
+*{
+	margin:0;
+	padding:0;
+	list-style: none;
+	text-decoration:none;
+}
+.wrapper{
+	width:70%;
+	margin:100px auto;
+	border:1px solid #666;
+}
+.com{
+	width:90%;
+	margin:20px auto;
+	padding:10px;
+	color: #333;
+	font-weight: bold;
+}
+.photosbox{
+	width:90%;
+	margin:20px auto;
+}
+.photos{
+	display: flex;
+	flex-wrap: wrap;
+}
+.photos li{
+	width:45px;
+	height:45px;
+	margin-right: 10px;
+	border:2px solid #f2f2f2;
+	position:relative;
+}
+.photos li span{
+	position:absolute;
+	border:6px solid transparent;
+	width:0;
+	height:0;
+	border-top:6px solid #f23d6a;
+	left:19px;
+	top:46px;
+	opacity:0;
+}
+.photos li img{
+	width:45px;
+	height:45px;
+	cursor: url('img/coverAdd.png'),auto;
+}
+.photos .tm-current{
+	border:2px solid #f23d6a;
+	border-radius: 2px;
+	cursor: auto;
+}
+.photos .tm-current span{
+	opacity: 1;
+}
+.photoview{
+	position:relative;
+	margin-top: 10px;
+	height:0;
+	width:0;
+	overflow: hidden;
+}
+.photoview a{
+	display: block;
+	width:40px;
+	position:absolute;
+	top:0;
+	cursor: auto;
+	height:100px;
+}
+.navL{
+	left:0;
+}
+.navR{
+	right:0;
+}
+.navL span{
+	left:8px;
+}
+.navR span{
+	right:8px;
+}
+.navL span,
+.navR span{
+	display: none;
+	cursor:pointer;
+	position:absolute;
+	font-size: 40px;
+	color:red;
+}
+.photoview,
+.photoview img,
+.photos .tm-current img {
+    cursor: url('img/coverSub.png'), auto;
+}

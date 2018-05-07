@@ -1,0 +1,21 @@
+/* pages/movie-more/movie-more.wxss */
+.session-tab{
+  width:100%;
+  position:fixed;
+  display:flex;
+  background:#fff;
+  z-index:1;
+  border:1rpx solid #e9e9e9;
+}
+.tab-name{
+  flex:1;
+  font-size:32rpx;
+  font-weight:600;
+  height:84rpx;
+  line-height:84rpx;
+  text-align:center;
+}
+.tab-select{
+  color:#32cd32;
+  border-bottom:2rpx solid #32cd32;
+}

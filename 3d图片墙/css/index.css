@@ -1,0 +1,131 @@
+*{
+	margin:0;
+	padding:0;
+	list-style: none;
+}
+.wrapper{
+	background: #f40;
+	width:660px;
+	height:440px;
+	margin:20px auto;
+	border:1px solid #000;
+}
+.wrapper .list{
+	display:flex;
+	flex-wrap: wrap;
+	width:100%;
+	height:100%;
+	justify-content: center;
+	align-content: center;
+
+}
+li{
+	perspective: 300px;	
+}
+.wrapper .list li .box{
+	position:relative;
+	width:200px;
+	height:200px;
+	margin:10px;
+	transform-style:preserve-3d;
+	transform-origin:50% 50% -100px;
+	animation: 0.25s ease-out forwards;
+	
+}
+.wrapper .list .box .show,
+.wrapper .list .box .hide{
+	position:absolute;
+	top:0;
+	left:0;
+	width:100%;
+	height:100%;
+	text-align: center;
+	line-height: 200px;
+	color:#fff;
+	background-color: #000;
+	opacity: 1;
+}
+.wrapper .list .box .hide{
+	transform: translateZ(-1px);
+}
+.box .show img{
+	width:100%;
+	height:100%;
+}
+.wrapper .list .in-top .box .hide,
+.wrapper .list .out-top .box .hide{
+	transform: translateZ(-100px) translate(0,-50%) rotate3d(1,0,0,90deg);
+}
+.wrapper .list .in-top .box{
+	animation-name:in-top;
+}
+.wrapper .list .out-top .box{
+	animation-name:out-top;
+}
+@keyframes in-top{
+	0%{transform: rotate3d(0,0,0,0);}
+	100%{transform: rotate3d(1,0,0,-90deg);}
+}
+@keyframes out-top{
+	0%{	transform: rotate3d(1,0,0,-90deg);}
+	100%{transform: rotate3d(0,0,0,0);}
+}
+
+.wrapper .list .in-left .box .hide,
+.wrapper .list .out-left .box .hide{
+	transform: translateZ(-100px) translate(-50%,0) rotate3d(0,1,0,-90deg);
+}
+.wrapper .list .in-left .box{
+	animation-name:in-left;
+}
+.wrapper .list .out-left .box{
+	animation-name:out-left;
+}
+@keyframes in-left{
+	0%{transform: rotate3d(0,0,0,0);}
+	100%{transform: rotate3d(0,1,0,90deg);}
+}
+@keyframes out-left{
+	0%{transform: rotate3d(0,1,0,90deg);}
+	100%{transform: rotate3d(0,0,0,0);}
+}
+
+
+.wrapper .list .in-right .box .hide,
+.wrapper .list .out-right .box .hide{
+	transform: translateZ(-100px) translate(50%,0) rotate3d(0,1,0,90deg);
+}
+.wrapper .list .in-right .box{
+	animation-name: in-right;
+}
+.wrapper .list .out-right .box{
+	animation-name: out-right;
+}
+@keyframes in-right{
+	0%{transform: rotate3d(0,0,0,0);}
+	100%{transform: rotate3d(0,1,0,-90deg);}
+}
+@keyframes out-right{
+	0%{transform: rotate3d(0,1,0,-90deg);}
+	100%{transform: rotate3d(0,0,0,0);}
+}
+
+
+.wrapper .list .in-bottom .box .hide,
+.wrapper .list .out-bottom .box .hide{
+	transform: translateZ(-100px) translate(0,50%) rotate3d(1,0,0,-90deg);
+}
+.wrapper .list .in-bottom .box{
+	animation-name: in-bottom;
+}
+.wrapper .list .out-bottom .box{
+	animation-name:out-bottom;
+}
+@keyframes in-bottom{
+	0%{transform: rotate3d(0,0,0,0);}
+	100%{transform: rotate3d(1,0,0,90deg);}
+}
+@keyframes out-bottom{
+	0%{transform: rotate3d(1,0,0,90deg);}
+	100%{transform: rotate3d(0,0,0,0);}
+}

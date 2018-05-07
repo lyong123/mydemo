@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html charset='utf-8'>
+<head >
+	<title>轮播图。。</title>
+	<style>
+		*{
+			margin:0;
+			padding:0;
+			list-style: none;
+		}
+		.wrapper{
+			position: relative;
+			width:400px;
+			height:250px;
+			margin:150px auto 0;
+			overflow: hidden;
+		}
+		.wrapper .slider{
+			position:absolute;
+			left:0;
+			width:2000px;
+			height:250px;
+		}
+		.wrapper .slider li{
+			cursor:default;
+			width:400px;
+			height:250px;
+			line-height: 250px;
+			float:left;
+			text-align: center;
+		}
+		.button{
+			position: absolute;
+			top: 50%;
+			margin-top: -15px;
+			width:40px;
+			height:30px;
+			color:#fff;
+			background: #999;
+			text-align: center;
+			opacity: 0.4;
+		}
+		.button:hover{
+			opacity: 0.7;
+			cursor:pointer;
+		}
+		.butleft{
+			left:0;
+		}
+		.butright{
+			right:0;
+		}
+		.sliderindex{
+			width:100%;
+			position:absolute;
+			bottom: 20px;
+			text-align: center;
+
+		}
+		.sliderindex span{
+			display: inline-block;
+			width:10px;
+			height:10px;
+			border-radius:50%;
+			background: #fff;
+			opacity: 0.5;
+			margin-left:5px;
+			cursor:pointer;
+		}
+		.sliderindex span.active{
+			background-color: #999;
+		}
+	</style>
+</head>
+<body>
+	<div class='wrapper'>
+		<ul class='slider'>
+			<li class='active' style="background-color: blue;"><h1>老师的课jfk撒娇的回复</h1></li>
+			<li style="background-color: red;"><h1>累死了的飞机撒大姐夫</h1></li>
+			<li style="background-color: yellow;"><h1>是分公司郭德纲</h1></li>
+			<li style="background-color: #f40;"><h1>时不时的关怀对方</h1></li>
+			<li style="background-color: blue;"><h1>老师的课jfk撒娇的回复</h1></li>
+		</ul>
+		<div class='button butleft'>&gt;</div>
+		<div class='button butright'>&lt;</div>
+		<div class='sliderindex'>
+			<span class="active"></span>
+			<span></span>
+			<span></span>
+			<span></span>
+		</div>
+	</div>
+<script type="text/javascript">
+	function getStyle(obj,attr){
+		if(obj.currentStyle){
+			return obj.currentStyle[attr];
+		}else{
+			return window.getComputedStyle(obj,null)[attr];
+		}
+	}
+	function stateMove(obj,attr,backfn){
+		var iCru , iSpeed;
+		clearInterval(obj.timer);
+		obj.timer = setInterval(function(){
+			var key = true;
+			for(var porp in attr){
+				if(porp == 'opacity'){
+					iCru = parseFloat(getStyle(obj,porp)) * 100;
+				}else{
+					iCru = parseInt(getStyle(obj,porp));
+				}
+				iSpeed = (attr[porp] - iCru) / 7;
+				iSpeed = iSpeed > 0 ? Math.ceil(iSpeed) : Math.floor(iSpeed);
+				if(porp == 'opacity'){
+					obj.style[porp] = (iCru + iSpeed) / 100;
+				}else{
+					obj.style[porp] = iCru + iSpeed + 'px';
+				}
+				if(iCru != attr[porp]){
+					key = false;
+				}
+			if(key){
+				clearInterval(obj.timer);
+				if(typeof backfn == 'function'){
+					backfn();
+				}
+			}
+		}
+		},30);
+	}
+	var timer = null,
+		lock = true,
+		index = 0,
+		sliderpage = document.getElementsByClassName('slider')[0],
+		movewidth = sliderpage.children[0].offsetWidth,
+		num = sliderpage.children.length - 1,
+		leftbtu = document.getElementsByClassName('button butleft')[0],
+		span = document.getElementsByClassName('sliderindex')[0].children,
+		rightbtu = document.getElementsByClassName('button butright')[0];
+	rightbtu.onclick = function(){
+		autoMove('left -> right');
+	}
+	leftbtu.onclick = function(){
+		autoMove('right -> left');
+	}
+	for(var i = 0;i < span.length;i ++){
+		(function(myindex){
+			span[i].onclick = function(){
+				lock = false;
+				index = myindex;
+				changeIndex(index);
+				clearTimeout(timer);
+				stateMove(sliderpage,{left: - index * movewidth},function(){
+					timer = setTimeout(autoMove,1500);
+					lock = true;
+				})
+			}
+		})(i)
+	}
+	function autoMove(diceration){
+		if(lock){
+			lock = false;
+			clearTimeout(timer);
+			if(!diceration || diceration == 'left -> right'){
+				index ++;
+				stateMove(sliderpage,{left:sliderpage.offsetLeft - movewidth},function(){
+					if(sliderpage.offsetLeft > - movewidth * num - 10 && sliderpage.offsetLeft < - movewidth * num + 10){
+						sliderpage.style.left = 0 +'px';
+						index = 0;
+					}
+					changeIndex(index);
+					timer = setTimeout(autoMove,1500);
+					lock = true;
+				})
+			}
+			if(diceration == 'right -> left'){
+				if(sliderpage.offsetLeft > -10 && sliderpage.offsetLeft < 10){
+					sliderpage.style.left = - movewidth * num + 'px';
+					index = num;
+				}
+				index --;
+				stateMove(sliderpage,{left:sliderpage.offsetLeft + movewidth},function(){
+					timer = setTimeout(autoMove,1500);
+					lock = true;
+					changeIndex(index);
+				})
+			}
+		}
+	}
+	function changeIndex(_index){
+		for(var b = 0;b < span.length;b ++){
+			span[b].className = '';
+		}
+		span[_index].className = 'active';
+	}
+	timer = setTimeout(autoMove,1500);
+</script>
+</body>
+</html>
